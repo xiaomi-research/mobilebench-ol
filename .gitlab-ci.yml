@@ -1,0 +1,10 @@
+stages:
+  - link
+
+flake8:
+  stage: link
+  image: micr.cloud.mioffice.cn/devx-build-image/python:3.11-centos7.9-base
+  before_script:
+    - pip3 install flake8
+  script:
+    - flake8 .
