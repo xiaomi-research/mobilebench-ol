@@ -9,6 +9,7 @@ This work has been tested in the following environment:
 * `PIL`
 * `cv2`
 * `numpy`
+* `csv`
 
 ## Supported Models
 
