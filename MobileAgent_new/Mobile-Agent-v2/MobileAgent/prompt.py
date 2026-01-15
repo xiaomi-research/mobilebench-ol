@@ -36,7 +36,7 @@ def get_action_prompt(instruction, clickable_infos, width, height, keyboard, sum
         prompt += "### History operations ###\n"
         prompt += "Before reaching this page, some operations have been completed. You need to refer to the completed operations to decide the next operation. These operations are as follow:\n"
         for i in range(len(action_history)):
-            prompt += f"Step-{i+1}: [Operation: " + \
+            prompt += f"Step-{i + 1}: [Operation: " + \
                 summary_history[i].split(" to ")[0].strip() + "; Action: " + action_history[i] + "]\n"
         prompt += "\n"
 
@@ -171,7 +171,7 @@ def get_process_prompt(instruction, thought_history, summary_history, action_his
         prompt += "To complete the requirements of user\'s instruction, you have performed a series of operations. These operations are as follow:\n"
         for i in range(len(summary_history)):
             operation = summary_history[i].split(" to ")[0].strip()
-            prompt += f"Step-{i+1}: [Operation thought: " + operation + \
+            prompt += f"Step-{i + 1}: [Operation thought: " + operation + \
                 "; Operation action: " + action_history[i] + "]\n"
         prompt += "\n"
 

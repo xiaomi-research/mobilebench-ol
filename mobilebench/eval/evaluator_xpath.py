@@ -317,7 +317,7 @@ def evaluate(task, step_data):
                     checked[xpath_idx] = True
                     break
 
-            print(f"Check Step #{i+1} ({image_path}): {checked}")
+            print(f"Check Step #{i + 1} ({image_path}): {checked}")
 
             # 若所有XPath均匹配成功，立即返回结果
             if all(checked):
@@ -336,6 +336,7 @@ def evaluate_by_local(task_rule, path):
     history_xml_string = []
     for image_path in history_image_path:
         xml_path = image_path.replace("png", "xml")
+        xml_path = xml_path.replace("jpg", "xml")
         with open(xml_path, encoding='utf-8') as f:
             xml_string = f.read()
             history_xml_string.append(xml_string)
@@ -358,6 +359,7 @@ def evaluate_by_local_old(task_rule, path):
     history_xml_string = []
     for image_path in history_image_path:
         xml_path = image_path.replace("png", "xml")
+        xml_path = xml_path.replace("jpg", "xml")
         with open(xml_path, encoding='utf-8') as f:
             xml_string = f.read()
             history_xml_string.append(xml_string)

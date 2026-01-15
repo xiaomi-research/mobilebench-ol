@@ -453,7 +453,7 @@ def generate_eval_html_report(
         ):
             continue
         html_str += (
-            f'<p>===============================<br>Task {str(index+1)}:'
+            f'<p>===============================<br>Task {str(index + 1)}:'
             f' {task_result["task_template"]}<br>'
             + single_result_html_generation(task_result)
         )
