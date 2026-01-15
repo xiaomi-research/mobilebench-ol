@@ -111,6 +111,5 @@ def back(adb_path, device_id):
 
 
 def home(adb_path, device_id):
-    command = adb_path + \
-        f" -s {device_id}   shell am start -a android.intent.action.MAIN -c android.intent.category.HOME"
+    command = adb_path + f" -s {device_id}   shell am start -a android.intent.action.MAIN -c android.intent.category.HOME"
     subprocess.run(command, capture_output=True, text=True, shell=True)

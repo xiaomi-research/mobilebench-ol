@@ -317,7 +317,7 @@ def evaluate_ratio(task, step_data):
                 if match_flag == 1:
                     checked[xpath_idx] = True
 
-            print(f"检查步骤 #{i+1} ({image_path}): {checked}")
+            print(f"检查步骤 #{i + 1} ({image_path}): {checked}")
 
             if all(checked):
                 return 1.0  # 虽然不提前 return，但可以跳出循环节省开销
@@ -370,7 +370,7 @@ def evaluate(task, step_data):
                     checked[xpath_idx] = True
                     break
 
-            print(f"Check Step #{i+1} ({image_path}): {checked}")
+            print(f"Check Step #{i + 1} ({image_path}): {checked}")
 
             # 若所有XPath均匹配成功，立即返回结果
             if all(checked):
@@ -389,6 +389,7 @@ def evaluate_by_local(task_rule, path):
     history_xml_string = []
     for image_path in history_image_path:
         xml_path = image_path.replace("png", "xml")
+        xml_path = xml_path.replace("jpg", "xml")
         with open(xml_path, encoding='utf-8') as f:
             xml_string = f.read()
             history_xml_string.append(xml_string)
@@ -410,6 +411,7 @@ def evaluate_by_local_ratio(task_rule, path):
     history_xml_string = []
     for image_path in history_image_path:
         xml_path = image_path.replace("png", "xml")
+        xml_path = xml_path.replace("jpg", "xml")
         with open(xml_path, encoding='utf-8') as f:
             xml_string = f.read()
             history_xml_string.append(xml_string)
@@ -432,6 +434,7 @@ def evaluate_by_local_old(task_rule, path):
     history_xml_string = []
     for image_path in history_image_path:
         xml_path = image_path.replace("png", "xml")
+        xml_path = xml_path.replace("jpg", "xml")
         with open(xml_path, encoding='utf-8') as f:
             xml_string = f.read()
             history_xml_string.append(xml_string)
@@ -587,7 +590,7 @@ def re_evaluate_all(model_name, file_name, reset: bool):
     # XPath 匹配得分均值
     score_ratio = sum(float(x) for x in ratio_all)
     sr_ratio = score_ratio / len(ratio_all) if ratio_all else 0
-    print(f"\nsub-ratio (XPath matched avg): {sr_ratio*100:.2f}%")
+    print(f"\nsub-ratio (XPath matched avg): {sr_ratio * 100:.2f}%")
 
     print("\nEvaluation:")
     print(f"SR (matched & finished): {count_SR} ({percentage(count_SR, total)})")

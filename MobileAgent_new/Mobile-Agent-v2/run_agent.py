@@ -368,7 +368,7 @@ def generate_api(images, query, qwen_api, caption_model):
                 icon_map[i + 1] = response
             except Exception as e:
                 # 所有重试都失败后，使用默认值
-                print(f"[generate_api] Icon {i+1} processing failed after all retries: {e}. Using default.")
+                print(f"[generate_api] Icon {i + 1} processing failed after all retries: {e}. Using default.")
                 icon_map[i + 1] = "This is an icon."
 
     return icon_map
@@ -636,11 +636,11 @@ def run_agent(params):
     task_completed = False
     iter = 0
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print(f"Starting task: {instruction}")
     print(f"Results directory: {results_dir}")
     print(f"Max steps: {max_steps}")
-    print(f"{'='*60}\n")
+    print(f"{'=' * 60}\n")
 
     while True:
         iter += 1
@@ -825,9 +825,9 @@ def run_agent(params):
                 "params": {"text": summary}
             })
             task_completed = True
-            print(f"\n{'='*60}")
+            print(f"\n{'=' * 60}")
             print(f"Task completed successfully!")
-            print(f"{'='*60}\n")
+            print(f"{'=' * 60}\n")
             break
 
         else:
