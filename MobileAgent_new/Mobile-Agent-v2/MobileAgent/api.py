@@ -7,7 +7,7 @@ from tenacity import (
     retry_if_exception_type,
 )
 
-#
+
 import time
 
 
@@ -33,7 +33,7 @@ def encode_image(image_path):
     retry=retry_if_exception_type((requests.exceptions.RequestException, KeyError, ValueError)),
     reraise=True
 )
-def inference_chat(chat, model, api_url, token):
+def inference_chat_old(chat, model, api_url, token):
     headers = {
         "Content-Type": "application/json",
         "api-key": token
@@ -61,13 +61,54 @@ def inference_chat(chat, model, api_url, token):
         if hasattr(e, 'response') and e.response is not None:
             try:
                 print(f"Response: {e.response.json()}")
-            except BaseException:
+            except Exception:
                 print(f"Response text: {e.response.text}")
         raise
     except (KeyError, ValueError) as e:
         print(f"Response parsing error: {e}")
         try:
             print(f"Response JSON: {res_json}")
-        except BaseException:
+        except Exception:
             print("Could not parse response")
         raise
+
+
+@timer_decorator
+@retry(
+    wait=wait_random_exponential(min=1, max=10),
+    stop=stop_after_attempt(6),
+    reraise=True
+)
+def inference_chat(chat, model, token, api_version="2025-01-01-preview", azure_endpoint="https://ui-agent-exp.openai.azure.com/"):
+    """
+    使用 Azure OpenAI SDK 进行推理
+
+    Args:
+        chat: 对话历史，格式为 [(role, content), ...]
+        model: 模型名称
+        token: Azure OpenAI API key
+        api_version: API 版本
+        azure_endpoint: Azure endpoint URL
+
+    Returns:
+        str: 模型返回的内容
+    """
+    from openai import AzureOpenAI
+
+    client = AzureOpenAI(
+        api_key=token,
+        azure_endpoint=azure_endpoint,
+        api_version=api_version
+    )
+
+    messages = [{"role": role, "content": content} for role, content in chat]
+
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        max_tokens=2048,
+        temperature=0.0,
+        seed=1234
+    )
+
+    return response.choices[0].message.content

@@ -234,7 +234,7 @@ class gpt4o_message_handler(object):
             pairs = list(zip(response_list, screenshot_list))[-9:]
 
             for i, (reply, _) in enumerate(pairs):
-                history_summaries += f"[Step {i+1}] {reply.strip()}\n"
+                history_summaries += f"[Step {i + 1}] {reply.strip()}\n"
 
         prompt_text = ACTION_SELECTION_PROMPT_TEMPLATE.format(
             goal=task,

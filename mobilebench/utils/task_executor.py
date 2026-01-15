@@ -10,9 +10,10 @@ from pathlib import Path
 from typing import List, Dict, Optional
 
 from mobilebench.utils import agent, agent_noise
-from mobilebench.models import llm_core_uitars_1_5, llm_core_uitars_1_5_newprompt_withresize
+from mobilebench.models import llm_core_uitars_1_5
 from mobilebench.models import llm_core_uitars
 from mobilebench.models import llm_core_gpt4o
+from mobilebench.models import llm_core_qwen2_5vl
 
 from mobilebench.utils import adb_executor
 from mobilebench.eval import evaluator_xpath as ev
@@ -59,7 +60,7 @@ class DeviceManager:
     def _connect(self):
         for attempt in range(self.max_retry):
             try:
-                print(f"[DeviceManager] Attempting to connect {self.serial}, the {attempt+1} times")
+                print(f"[DeviceManager] Attempting to connect {self.serial}, the {attempt + 1} times")
                 d = u2.connect(self.serial)
                 d.set_input_ime(True)
                 if self.is_uiautomator_alive(d):
@@ -120,6 +121,16 @@ class AgentFactory:
             return agent_noise.base_agent(device, llm_core_uitars.uitars_Wrapper(url), "popup")
         elif model_name.startswith("uitars"):
             return agent.base_agent(device, llm_core_uitars.uitars_Wrapper(url))
+        elif model_name.startswith("qwen2_5vl_noise_repeat"):
+            return agent_noise.base_agent(device, llm_core_qwen2_5vl.qwen2_5vl_Wrapper(url), "repeat")
+        elif model_name.startswith("qwen2_5vl_noise_unexecuted"):
+            return agent_noise.base_agent(device, llm_core_qwen2_5vl.qwen2_5vl_Wrapper(url), "unexecuted")
+        elif model_name.startswith("qwen2_5vl_noise_delay"):
+            return agent_noise.base_agent(device, llm_core_qwen2_5vl.qwen2_5vl_Wrapper(url), "delay")
+        elif model_name.startswith("qwen2_5vl_noise_popup"):
+            return agent_noise.base_agent(device, llm_core_qwen2_5vl.qwen2_5vl_Wrapper(url), "popup")
+        elif model_name.startswith("qwen2_5vl"):
+            return agent.base_agent(device, llm_core_qwen2_5vl.qwen2_5vl_Wrapper(url))
         elif model_name.startswith("m3a_noise") or model_name.startswith("t3a_noise"):
             # M3A/T3A Noise模式 - 统一agent with noise
             # 解析噪声类型：model_name格式为 "m3a_noise_delay" 或 "t3a_noise_unexecuted"
@@ -178,6 +189,32 @@ class AgentFactory:
             return agent_m3a_t3a.m3a_t3a_agent(device, llm, use_image=use_image, debug=False)
         elif model_name.startswith("gpt4o"):
             return agent.base_agent(device, llm_core_gpt4o.GPT4oWrapper())
+        
+        elif model_name.startswith("mobileagentv2_noise"):
+            from mobilebench.models import llm_core_mobileagent_v2
+            from mobilebench.utils import agent_mobileagent_v2_noise
+            parts = url.split("|")
+            api_url = parts[0] if len(parts) > 0 else url
+            token = parts[1] if len(parts) > 1 else ""
+            qwen_api = parts[2] if len(parts) > 2 else ""
+            caption_model = parts[3] if len(parts) > 3 else "qwen-vl-max-latest"
+            llm = llm_core_mobileagent_v2.MobileAgentV2Wrapper(api_url, token)
+            noise_type = ""
+            for candidate in ("repeat", "unexecuted", "delay", "popup"):
+                if model_name.startswith(f"mobileagentv2_noise_{candidate}"):
+                    noise_type = candidate
+                    break
+            return agent_mobileagent_v2_noise.base_agent(device, llm, qwen_api, caption_model, noise_type)
+        elif model_name.startswith("mobileagentv2"):
+            from mobilebench.models import llm_core_mobileagent_v2
+            from mobilebench.utils import agent_mobileagent_v2
+            parts = url.split("|")
+            api_url = parts[0] if len(parts) > 0 else url
+            token = parts[1] if len(parts) > 1 else ""
+            qwen_api = parts[2] if len(parts) > 2 else ""
+            caption_model = parts[3] if len(parts) > 3 else "qwen-vl-max-latest"
+            llm = llm_core_mobileagent_v2.MobileAgentV2Wrapper(api_url, token)
+            return agent_mobileagent_v2.base_agent(device, llm, qwen_api, caption_model)
 
         raise ValueError(f"Unknown model {model_name}")
 
@@ -346,7 +383,7 @@ def try_execute_task_with_retry(task: Task, BASE_DIR: str, executor: TaskExecuto
                                 connent_retry: int, fail_retry: int, reset: bool) -> Optional['Trajectory']:
     """
     包装任务执行逻辑，支持 FAIL_RETRY 次失败重试（非连接错误），
-    并保证无论成功失败，最后一次 traj 都能返回。
+    并保证无论成功失败，最後一次 traj 都能返回。
     """
     task_dir = os.path.join(BASE_DIR, task.identifier)
 

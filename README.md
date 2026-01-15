@@ -1,21 +1,29 @@
 # An Online Evaluation Framework for Mobile GUI Agents
 
+![Pipeline](assets/pipeline.png)
 
 ## Requirements and Installation
 
 This work has been tested in the following environment:
-* `python == 3.11`
+* `python == 3.10`
 * `uiautomator2`
 * `PIL`
 * `cv2`
 * `numpy`
 * `csv`
 
+### Note for Mobile Agent V2
+If you plan to use **Mobile Agent V2**, please follow the official environment configuration instructions provided [here](https://github.com/X-PLUG/MobileAgent/tree/main/Mobile-Agent-v2).
+
 ## Supported Models
 
 | Model                                                                | Model Name        | Organization |
 |----------------------------------------------------------------------|-------------------|--------------|
-| [UI-TARS-1.5](https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B)  | `ui-tars-1.5-7b`  | Bytedance    |
+| [UI-TARS-1.5](https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B)  | `uitars_1_5`      | Bytedance    |
+| GPT-4o                                                               | `gpt4o`           | OpenAI       |
+| M3A(from [AndroidWorld](https://github.com/google-research/android_world/tree/main))    | `m3a`             | Google       |
+| [Mobile Agent V2](https://github.com/X-PLUG/MobileAgent/tree/main/Mobile-Agent-v2) | `mobileagentv2` | Qwen |
+ 
 
 
 ## Model Deployment
