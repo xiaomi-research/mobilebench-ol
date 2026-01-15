@@ -112,7 +112,7 @@ class m3a_t3a_agent(base_agent):
     ) -> tuple[int, int]:
         """将UI元素索引转换为屏幕坐标"""
         if index >= len(ui_elements):
-            raise ValueError(f"Index {index} out of range (max: {len(ui_elements)-1})")
+            raise ValueError(f"Index {index} out of range (max: {len(ui_elements) - 1})")
 
         elem = ui_elements[index]
         return elem['center']

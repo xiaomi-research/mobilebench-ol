@@ -207,7 +207,7 @@ class m3a_message_handler(object):
         if history and history.get("summary"):
             summary_list = history["summary"]
             history_text = '\n'.join([
-                f'Step {i+1}- {summary}'
+                f'Step {i + 1}- {summary}'
                 for i, summary in enumerate(summary_list)
             ])
         else:

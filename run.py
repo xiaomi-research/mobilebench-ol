@@ -17,7 +17,7 @@ from mobilebench.eval import evaluator_xpath_step_ratio as eval_trajectory
 def parse_args():
     parser = argparse.ArgumentParser(description="Run the GUI agent benchmark.")
     parser.add_argument('--mode', type=str, default='interact', help='Trajectory generation or trajectory evaluation')
-    parser.add_argument('--config', type=str, default='config/interact_uitars15_base.conf', help='config file')
+    parser.add_argument('--config', type=str, default='config/interact_qwen2_5vl_base.conf', help='config file')
     # parser.add_argument('--mode', type=str, default='evaluate', help='Trajectory generation or trajectory evaluation')
     # parser.add_argument('--config', type=str, default='config/evaluate.conf', help='config file')
     parser.add_argument('--subset', type=str, default='base', help='[base,long-tail,long-horizon,gui-reasoning,noise-robust]')
@@ -75,6 +75,12 @@ def main():
                 'temperature': float(config.get('azure', 'temperature')),
                 'max_length': int(config.get('azure', 'max_length')),
             }
+        if MODEL_NAME.startswith("mobileagentv2"):
+            TOKEN = config.get('model', 'token')
+            CAPTION_CALL_METHOD = config.get('model', 'caption_call_method')
+            CAPTION_MODEL = config.get('model', 'caption_model')
+            QWEN_API = config.get('model', 'qwen_api')
+            MODEL_URL = f"{MODEL_URL}|{TOKEN}|{QWEN_API}|{CAPTION_MODEL}"
 
         if "noise" not in args.subset:
             task_file = get_task_file(args.subset)
