@@ -74,19 +74,19 @@ python3 run.py --mode evaluate --config config/evaluate.conf
 - `rule (str)`:
 
 
-### License
+## License
 
 The dataset of this project is licensed under the [**Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)**](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
 
 The source code of the this is licensed under the [**Apache 2.0**](http://www.apache.org/licenses/LICENSE-2.0)  license.
 
-#### Summary of Terms
+### Summary of Terms
 - **Attribution**: You must give appropriate credit, provide a link to the license, and indicate if changes were made.
 - **NonCommercial**: You may not use the material for commercial purposes.
 - **ShareAlike**: If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
 
 
-#### License Badge
+### License Badge
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ## Citation
