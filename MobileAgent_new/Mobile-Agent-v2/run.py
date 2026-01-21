@@ -41,7 +41,7 @@ instruction = "搜索'咖啡店服务员'"
 API_url = "https://ui-agent-exp.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-02-15-preview"
 
 # Your GPT-4o API Token
-token = "3aeg82V4i5DX1bZCCfMhdtfVtHSvklZMdsc5XAHyh85C6fbODyvpJQQJ99BBACYeBjFXJ3w3AAABACOG5iX9"
+token = ""
 
 # Choose between "api" and "local". api: use the qwen api. local: use the local qwen checkpoint
 caption_call_method = "api"
@@ -52,7 +52,7 @@ caption_call_method = "api"
 caption_model = "qwen-vl-plus"
 
 # If you choose the api caption call method, input your Qwen api here
-qwen_api = "sk-SPgAdtYa9I6gtXb0Nv4CfRCQI77BHCEajG9dJ10rjhWbUGye"
+qwen_api = ""
 
 # You can add operational knowledge to help Agent operate more accurately.
 add_info = "If you want to tap an icon of an app, use the action \"Open app\". If you want to exit an app, use the action \"Home\""
