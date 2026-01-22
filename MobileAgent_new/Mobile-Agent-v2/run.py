@@ -120,7 +120,7 @@ def encode_image(image_path):
 def process_image(image, query):
     client = OpenAI(
         api_key=qwen_api,
-        base_url="http://model.mify.ai.srv/v1",
+        base_url="",
         default_headers={
             "X-Model-Provider-Id": "tongyi"
         }
