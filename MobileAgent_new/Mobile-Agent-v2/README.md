@@ -94,6 +94,12 @@ pip install -r requirements.txt
 python run.py
 ```
 
+
+
+## License
+
+MIT License
+
 ## 📑Citation
 
 If you find Mobile-Agent useful for your research and applications, please cite using this BibTeX:
