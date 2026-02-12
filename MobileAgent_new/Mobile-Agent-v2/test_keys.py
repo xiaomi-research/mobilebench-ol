@@ -5,8 +5,8 @@ from MobileAgent.api import inference_chat
 
 # Azure OpenAI configuration
 API_url = "https://ui-agent-exp.openai.azure.com"
-key1 =  
-key2 =  
+key1 =  ""
+key2 =  ""
 
 # Test chat messages
 test_chat = [
