@@ -603,8 +603,8 @@ class GPT4oWrapper():
         max_tokens = 3500
         self.max_length = max_length
         model = "gpt-4o"
-        api_key = "3aeg82V4i5DX1bZCCfMhdtfVtHSvklZMdsc5XAHyh85C6fbODyvpJQQJ99BBACYeBjFXJ3w3AAABACOG5iX9"
-        azure_endpoint = "https://ui-agent-exp.openai.azure.com/"
+        api_key = " "
+        azure_endpoint = " "
         api_version = "2025-01-01-preview"
         self.client = Azure_Openai_Client(
     model,
