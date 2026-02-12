@@ -36,13 +36,13 @@ python3 run.py --mode interact --config config/interact.conf --subset base --out
 ```
 
 **parameters**
-- `mode`:  `[interact, evaluate] ` - Running mode. "interact" means the agent will interact with the environment to collect GUI trajectories; "evaluate" means it will evaluate existing  GUI trajectories.
-- `config`: `config file path ` - Path to the configuration file that contains all other parameter settings.
-- `subset`: `[base,long-tail,long-horizon,gui-reasoning,noise-robust]` - Selects which subset of tasks to run from the benchmark. Different subsets test different agent abilities.
-- `output`: `output path ` - Directory path where the collected trajectory data will be saved. (e.g., "results/round1").
+- `mode`:  `[interact, evaluate] `  Running mode. "interact" means the agent will interact with the environment to collect GUI trajectories; "evaluate" means it will evaluate existing  GUI trajectories.
+- `config`: `config file path `  Path to the configuration file that contains all other parameter settings.
+- `subset`: `[base,long-tail,long-horizon,gui-reasoning,noise-robust]`  Selects which subset of tasks to run from the benchmark. Different subsets test different agent abilities.
+- `output`: `output path `  Directory path where the collected trajectory data will be saved. (e.g., "results/round1").
 
 
-### config file settings
+### Config file settings
 
 **device**
 - `id (str)`: The device id of physical device. Input "adb devices" in the terminal to obtain device id.
@@ -66,6 +66,9 @@ python3 run.py --mode interact --config config/interact.conf --subset base --out
 ```commandline
 python3 run.py --mode evaluate --config config/evaluate.conf
 ```
+
+### Config file settings
+
 **evaluation**
 - `type (str)`: xpath
 - `trajectory (str)`: Path to GUI trajectories to be evaluated. (e.g., "results/round1").
