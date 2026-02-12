@@ -38,7 +38,7 @@ max_steps = 20
 instruction = "搜索'咖啡店服务员'"
 
 # Your GPT-4o API URL
-API_url = "https://ui-agent-exp.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-02-15-preview"
+API_url = ""
 
 # Your GPT-4o API Token
 token = ""
